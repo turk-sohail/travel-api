@@ -1,4 +1,4 @@
-This project is based on repository pattern similar to nestjs but i have used sequelize with 
+This project is based on repository pattern similar to nestjs but i have used mongo with 
 express.
 I have use Plain javascript without typescript with good folder structures but it is flexible
 and can be modified as needed.
