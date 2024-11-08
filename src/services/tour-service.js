@@ -1,8 +1,8 @@
 const { Tour } = require("../models");
 
-const getAll = async () => {
+const getAll = async (params) => {
   try {
-    const tours = await Tour.find();
+    const tours = await Tour.find(params);
     return tours;
   } catch (error) {
     throw error;

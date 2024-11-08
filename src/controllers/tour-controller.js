@@ -2,8 +2,24 @@ const { tourService } = require("../services");
 const { StatusCodes } = require("http-status-codes");
 
 const getAll = async (req, res) => {
-  const tours = await tourService.getAll();
-  return res.status(StatusCodes.OK).json(tours);
+  const queryObject = { ...req.query };
+  const excludedFields = ["sort", "page", "limit", "fields"];
+  excludedFields.forEach((el) => delete queryObject[el]);
+
+  const queryString = JSON.stringify(req.query);
+  console.log(req.query);
+
+  const queryStr = queryString.replace(
+    /\b(gte|gt|lte|lt)\b/g,
+    (match) => `$${match}`
+  );
+  const quObject = JSON.parse(queryStr);
+
+  const tours = tourService.getAll(quObject);
+
+  const query = await tours;
+
+  return res.status(StatusCodes.OK).json(query);
 };
 
 const createOne = async (req, res) => {
